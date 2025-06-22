@@ -5,6 +5,7 @@ import type { Candidate } from '../types';
 
 export const useCandidateStore = defineStore('candidate', () => {
   const candidates = ref<Candidate[]>([...initialCandidates]);
+  const filteredCandidates = ref<Candidate[]>([...candidates.value]);
 
   // Eksempel på en computed getter
   const allCandidates = computed(() => candidates.value);
@@ -14,9 +15,43 @@ export const useCandidateStore = defineStore('candidate', () => {
     candidates.value.push(candidate);
   }
 
+  /**
+   * Filter candidates based on search string and a set of search parameters to be used for filtering
+   * @param search - The search string
+   * @param searchParams - The search parameters to filter by, defaults to `firstname`, `lastname` and `email`
+   * @returns The filtered candidates
+   */
+  const searchCandidates = (
+    search: string, 
+    searchParams: string[] = ['firstname', 'lastname', 'email']
+  ): void => {
+    if(search === '') {
+      filteredCandidates.value = candidates.value;
+      return;
+    }
+
+    // Filter candidates based on search parameters and search string
+    filteredCandidates.value = candidates.value.filter((candidate) => {
+      return searchParams.some((param) => {
+
+        // Make sure the parameter is a valid key of the Candidate interface
+        if(param in candidate) {
+          return candidate[param as keyof Candidate]?.toLowerCase().includes(search.toLowerCase());
+        }
+        else {
+          console.error(`Invalid search parameter: ${param}`);
+          return false;
+        }
+      });
+    });
+  };
+
+
   return {
     candidates,
     allCandidates,
     addCandidate,
+    searchCandidates,
+    filteredCandidates,
   };
 });

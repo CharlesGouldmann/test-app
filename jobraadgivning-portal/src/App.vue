@@ -18,4 +18,11 @@
 
 <style>
 /* Add any global styles here */
+:root {
+  --header-height: 64px;
+  --footer-height: 56px;
+}
+main {
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
 </style>

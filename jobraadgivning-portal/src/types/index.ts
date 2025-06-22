@@ -8,6 +8,7 @@ export interface Candidate {
   advisor: string;
   country: 'dk' | 'no' | 'se' | 'fi';
   language: string;
+  image: string;
 }
 
 export interface Job {

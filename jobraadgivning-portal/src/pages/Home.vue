@@ -12,7 +12,4 @@ import CandidatesBlock from '../components/CandidatesBlock.vue';
 </script>
 
 <style scoped>
-.container {
-  max-width: 1200px;
-}
 </style>

@@ -5,8 +5,10 @@
 
 		<section class="bg-white p-4 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4 max-w-screen-lg">
 			<figure class="flex justify-end w-full mb-4 md:order-2">
-				<picture class="bg-gray-200 max-w-xs max-h-xs rounded-lg overflow-hidden">
-					<img :src="candidate?.image" alt="Profile picture" class="w-full h-full object-cover ">
+				<picture class="bg-gray-200 max-w-xs max-h-xs rounded-lg overflow-hidden aspect-square">
+					<img v-if="candidate?.image" :src="candidate?.image" alt="Profile picture" class="w-full h-full object-cover ">
+					<div v-else alt="Default profile picture" class="icon --user w-full h-full">
+					</div>
 				</picture>
 			</figure>
 
@@ -64,9 +66,9 @@ import { useCandidateStore } from '../store/candidateStore';
 const route = useRoute();
 const candidateId = route.params.id;
 const candidateStore = useCandidateStore();
-const { candidates } = storeToRefs(candidateStore);
+const { allCandidates } = storeToRefs(candidateStore);
 
-const candidate = computed(() => candidates.value.find((candidate) => candidate.id === candidateId));
+const candidate = computed(() => allCandidates.value.find((candidate) => candidate.id === candidateId));
 </script>
 
 <style scoped>

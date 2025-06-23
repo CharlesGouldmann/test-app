@@ -5,7 +5,7 @@ import type { Candidate } from '../types';
 
 export const useCandidateStore = defineStore('candidate', () => {
   const candidates = ref<Candidate[]>([...initialCandidates]);
-  const filteredCandidates = ref<Candidate[]>([...candidates.value]);
+  const searchedCandidates = ref<Candidate[]>([...candidates.value]);
 
   // Eksempel på en computed getter
   const allCandidates = computed(() => candidates.value);
@@ -18,7 +18,7 @@ export const useCandidateStore = defineStore('candidate', () => {
   /**
    * Filter candidates based on search string and a set of search parameters to be used for filtering
    * @param search - The search string
-   * @param searchParams - The search parameters to filter by, defaults to `firstname`, `lastname` and `email`
+   * @param searchParams - Optional search parameters to filter by, defaults to `firstname`, `lastname` and `email`
    * @returns The filtered candidates
    */
   const searchCandidates = (
@@ -26,12 +26,12 @@ export const useCandidateStore = defineStore('candidate', () => {
     searchParams: string[] = ['firstname', 'lastname', 'email']
   ): void => {
     if(search === '') {
-      filteredCandidates.value = candidates.value;
+      searchedCandidates.value = candidates.value;
       return;
     }
 
     // Filter candidates based on search parameters and search string
-    filteredCandidates.value = candidates.value.filter((candidate) => {
+    searchedCandidates.value = candidates.value.filter((candidate) => {
       return searchParams.some((param) => {
 
         // Make sure the parameter is a valid key of the Candidate interface
@@ -48,10 +48,9 @@ export const useCandidateStore = defineStore('candidate', () => {
 
 
   return {
-    candidates,
     allCandidates,
+    searchedCandidates,
     addCandidate,
     searchCandidates,
-    filteredCandidates,
   };
 });

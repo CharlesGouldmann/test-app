@@ -20,7 +20,6 @@ export const candidates: Candidate[] = [
     email: 'emma.svensson@email.se',
     username: 'emma.svensson@email.se',
     address: 'Storgatan 5, 111 22 Stockholm',
-    image: 'https://picsum.photos/200/200',
     advisor: 'Lars Karlsson',
     country: 'se',
     language: 'sv',

@@ -65,5 +65,9 @@ main {
   &.--language {
     mask-image: url('./assets/icons/language.svg');
   }
+
+  &.--user {
+    mask-image: url('./assets/icons/user.svg');
+  }
 }
 </style>

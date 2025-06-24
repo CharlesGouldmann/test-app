@@ -7,7 +7,7 @@
 		<section class="flex items-center gap-6 items-center mb-4 flex-wrap">
 			<!-- Filters -->
 			<div class="flex items-center gap-2 flex-wrap">
-				<label class="text-sm text-gray-500"> Sorter efter: </label>
+				<label class="text-sm text-gray-500"> Filtrer efter: </label>
 				<filter-select v-if="advisors.length > 1" v-model="filters.advisor" :options="advisors" :label="'Rådgivere'" />
 				<filter-select v-if="countries.length > 1" v-model="filters.country" :options="countries" :label="'Lande'" />
 				<filter-select v-if="languages.length > 1" v-model="filters.language" :options="languages" :label="'Sprog'" />
